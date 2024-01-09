@@ -14,6 +14,12 @@ app.get("/", (req,res)=>{
     res.send("Hello World");
 })
 
+const usersRoutes = require("./routes/users.routes");
+
+
+app.use('/api/', usersRoutes);
+
+
 app.listen(PORT, () => {
     console.log(`>Listening on port: http://localhost:${PORT}`);
 })
