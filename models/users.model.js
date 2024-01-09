@@ -32,11 +32,11 @@ async function getAllUsers() {
 
 
 
-async function updateUser(id, email, password) {
+async function updateUser(id, email, admin) {
   try {
     const result = await pool.query(
       queriesUser.updateUser,
-      [email, password, id]
+      [email, admin, id]
     );
     return result.rows[0];
   } catch (error) {
