@@ -63,7 +63,7 @@ const handleLogin = async (req, res) => {
         process.env.REFRESH_TOKEN_SECRET,
         { expiresIn: '1d' }
       )
-      res.json({ accessToken })
+      res.json({ "username": foundUser.username, accessToken })
     } else {
       res.sendStatus(401);
     }

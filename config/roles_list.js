@@ -1,3 +1,0 @@
-const ROLES_LIST = {
-    
-}
