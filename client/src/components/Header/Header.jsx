@@ -1,8 +1,12 @@
 import React from "react";
 import logoImg from "../../assets/logo_several.png";
+import "./Header.css"
 
 const Header = () => {
-  return <img src={logoImg}></img>;
+  return <div className="container-logo">
+    <img className="logo" src={logoImg}></img>
+    <p className="name-header">¡Hola Usuario! 👤 </p>
+  </div> 
 };
 
 export default Header;

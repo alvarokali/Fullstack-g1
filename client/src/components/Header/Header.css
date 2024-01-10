@@ -1,0 +1,16 @@
+
+.container-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 180px; 
+  }
+  
+  .logo {
+    width: 400px; 
+    height: auto;
+  }
+  .name-header{
+    font-size: 20px;
+    font-weight: 560;
+  }
