@@ -1,7 +1,8 @@
 import React from "react";
+import logoImg from "../../assets/logo_several.png";
 
 const Header = () => {
-  return <div>Header</div>;
+  return <img src={logoImg}></img>;
 };
 
 export default Header;
