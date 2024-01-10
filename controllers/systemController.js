@@ -3,9 +3,7 @@ const System = require("../models/systemModel");
 const createSystem = async (req, res) => {
   const { name } = req.body;
   try {
-    const newSystem = await System.create({
-      name,
-    });
+    const newSystem = await System.createSystem(name);
     res.status(201).json(newSystem);
   } catch (error) {
     res.status(500).json({ error: "Error creating the system" });
@@ -14,7 +12,7 @@ const createSystem = async (req, res) => {
 
 const getAllSystem = async (req, res) => {
   try {
-    const systems = await System.find({});
+    const systems = await System.getSystemAll();
     res.status(200).json(systems);
   } catch (error) {
     res.status(500).json({ error: "Error getting all systems" });
@@ -24,7 +22,7 @@ const getAllSystem = async (req, res) => {
 const getSystemById = async (req, res) => {
   const { id } = req.params;
   try {
-    const system = await System.findById(id);
+    const system = await System.getSystemById(id);
     res.status(200).json(system);
   } catch (error) {
     res.status(500).json({ error: "Error getting the system" });
@@ -33,13 +31,9 @@ const getSystemById = async (req, res) => {
 
 const updateSystem = async (req, res) => {
   const { id } = req.params;
-  const { name, description } = req.body;
+  const { name } = req.body;
   try {
-    const updatedSystem = await System.findByIdAndUpdate(
-      id,
-      { name },
-      { new: true }
-    );
+    const updatedSystem = await System.updateSystem(id, name);
     res.status(200).json(updatedSystem);
   } catch (error) {
     res.status(500).json({ error: "Error updating the system" });
@@ -49,10 +43,13 @@ const updateSystem = async (req, res) => {
 const deleteSystem = async (req, res) => {
   const { id } = req.params;
   try {
-    await System.findByIdAndDelete(id);
-    res.status(204).json();
+    const result = await System.deleteSystem(id);
+    if (result) {
+      res.status(204).json();
+    } else {
+      res.status(404).json({ message: "System not found" });
+    }
   } catch (error) {
-    console.error(error);
     res.status(500).json({ error: "Error deleting the system" });
   }
 };
