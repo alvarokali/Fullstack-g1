@@ -1,7 +1,8 @@
 import React from "react";
+import FormEnergy from "./FormEnergy/FormEnergy";
 
 const TableEnergy = () => {
-  return <div>TableEnergy</div>;
+  return <FormEnergy/>;
 };
 
 export default TableEnergy;
