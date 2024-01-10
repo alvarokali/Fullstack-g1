@@ -1,5 +1,7 @@
 const users = require("../models/users.model");
 const bcrypt = require('bcrypt')
+const jwt = require("jsonwebtoken")
+require('dotenv').config();
 
 const createUser = async (req, res) => {
 
@@ -50,7 +52,18 @@ const handleLogin = async (req, res) => {
     // evaluate password
     const match = await bcrypt.compare(pwd, foundUser.password)
     if (match) {
-      res.json({"success": `User ${foundUser.username} is logged in!`})
+      // create JWTs
+      const accessToken = jwt.sign(
+        {"username": foundUser.username},
+        process.env.ACCESS_TOKEN_SECRET,
+        { expiresIn: '15m' }
+      )
+      const refreshToken = jwt.sign(
+        {"username": foundUser.username},
+        process.env.REFRESH_TOKEN_SECRET,
+        { expiresIn: '1d' }
+      )
+      res.json({ accessToken })
     } else {
       res.sendStatus(401);
     }
