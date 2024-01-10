@@ -7,6 +7,7 @@ const FormClient = () => {
       <input type="text" placeholder="Dirección"/>  
       <input type="text"  placeholder="Compañía actual"/>
     </form>
+    <button>Continuar</button>
   </>;
 };
 

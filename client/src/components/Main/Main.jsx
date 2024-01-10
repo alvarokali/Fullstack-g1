@@ -10,8 +10,6 @@ const Main = () => {
       <Route path="/home" element={<Home />} />
       <Route path="/cups" element={<Cups />} />
       <Route path="/client" element={<DataClient />} />
-
-
     </Routes>
 
 
