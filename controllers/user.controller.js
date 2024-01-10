@@ -41,6 +41,25 @@ const getUserById = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+const handleLogin = async (req, res) => {
+  try {
+    const { email, pwd } = req.body
+    if (!email || !pwd) return res.status(400).json({"message": "Email and password are required"})
+    let foundUser = await users.getUserByEmail(email);
+    if (!foundUser) return res.sendStatus(401)
+    // evaluate password
+    const match = await bcrypt.compare(pwd, foundUser.password)
+    if (match) {
+      res.json({"success": `User ${foundUser.username} is logged in!`})
+    } else {
+      res.sendStatus(401);
+    }
+    // res.status(200).json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
 
 const getAllUsers = async (req, res) => {
   try {
@@ -83,4 +102,10 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = {getUserById, getAllUsers, createUser, updateUser, deleteUser};
+module.exports = {
+  getUserById,
+  handleLogin, 
+  getAllUsers, 
+  createUser, 
+  updateUser, 
+  deleteUser};
