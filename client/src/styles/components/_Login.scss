@@ -10,19 +10,19 @@ img.auth-logo {
     height: 100vh;
 }
 
-#login-color-picture {
+.color-picture-article {
     width: 40%;
     position: relative;
 
-    img {
+    .hero-img {
         position: absolute;
-        top: 0;
+        top: -20px;
         bottom: 0;
         right: 0;
-        left: 0;
-        object-fit: cover;
-        height: 100%;
+        left: -25px;
+        height: 110%;
         width: 100%;
+        object-fit: cover;
     }
 }
 

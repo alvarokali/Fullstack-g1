@@ -61,8 +61,8 @@ const Login = () => {
 
     return (
         <section id="login-section">
-            <article id="login-color-picture">
-                <img src={heroImage} alt="" />
+            <article className="color-picture-article">
+                <img src={heroImage} className="hero-img" alt="" />
             </article>  
             <article id="login-form">
                 <img src={logoSeveral} className='auth-logo' alt="" />
