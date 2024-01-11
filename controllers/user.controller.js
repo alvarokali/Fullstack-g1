@@ -12,11 +12,11 @@ const createUser = async (req, res) => {
     const hashedPwd = await bcrypt.hash(pwd, 10)
     //store new user
     const newUser = { 
-      username: user, 
+      asesor: user, 
       email: email, 
       password: hashedPwd,
-      phone: phone,
-      branch: branch  
+      contacto: phone,
+      delegacion: branch  
     }
     console.log(newUser)
     const response = await users.createUser(newUser);
@@ -69,7 +69,12 @@ const handleLogin = async (req, res) => {
         process.env.REFRESH_TOKEN_SECRET,
         { expiresIn: '1d' }
       )
-      res.json({ "username": foundUser.username, accessToken })
+      res.json({ 
+        "asesor": foundUser.asesor,
+        "contacto": foundUser.contacto,
+        "delegacion": foundUser.delegacion,
+        accessToken,
+       })
     } else {
       res.sendStatus(401);
     }

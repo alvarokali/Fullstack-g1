@@ -33,9 +33,11 @@ const Login = () => {
                     headers: { 'Content-Type': 'application/json' }
                 })
             console.log(response?.data)
-            const username = response?.data?.username
+            const asesor = response?.data?.asesor
+            const contacto = response?.data?.contacto
+            const delegacion = response?.data?.delegacion
             const accessToken = response?.data?.accessToken
-            setAuth({ email, username, accessToken })
+            setAuth({ email, asesor, contacto, delegacion, accessToken })
             setEmail("")
             setPwd("")
             setSuccess(true)
