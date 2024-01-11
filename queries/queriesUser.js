@@ -1,24 +1,30 @@
 const queriesUser = {
-    getUserById: `
-        SELECT 
-            id_user,
+  getUserById: `
+         SELECT 
+            usuario_id,
             email,
-            password
-        FROM users
-        WHERE id_user = $1;`,
-                        
-    getAllUsers: `SELECT * FROM users;`,
+             password,
+             admin,
+             asesor,
+             contacto,
+             delegacion
+         FROM usuarios
+         WHERE usuario_id = $1;`,
 
-    createUser: `INSERT INTO users(email, password) 
-                    VALUES ($1, $2)
-                    RETURNING *`,
+  getAllUsers: `SELECT * FROM usuarios;`,
 
-    updateUser:  `UPDATE users
-                    SET email = $1, admin = $2
-                    WHERE id_user = $3;
-                    RETURNING *`,
+  createUser: `
+        INSERT INTO usuarios(email, password, admin, asesor, contacto, delegacion) 
+        VALUES ($1, $2, $3, $4, $5, $6)
+        RETURNING *;`,
 
-    deleteUser: `DELETE FROM users
-                    WHERE id_user = $1;`
-}
+  updateUser: `
+        UPDATE usuarios
+        SET email = $1, password = $2, admin = $3, asesor = $4, contacto = $5, delegacion = $6
+        WHERE usuario_id = $7
+        RETURNING *;`,
+
+  deleteUser: `DELETE FROM usuarios WHERE usuario_id = $1;`,
+};
+
 module.exports = queriesUser;
