@@ -5,13 +5,19 @@ require('dotenv').config();
 
 const createUser = async (req, res) => {
 
-  const { user, pwd, email } = req.body;
+  const { user, pwd, email, phone, branch } = req.body;
   if (!user || !pwd || !email) return res.status(400).json({ "message": "Username, email and password are required"})
   try {
     //encrypt the pwd
     const hashedPwd = await bcrypt.hash(pwd, 10)
     //store new user
-    const newUser = { username: user, email: email, password: hashedPwd }
+    const newUser = { 
+      username: user, 
+      email: email, 
+      password: hashedPwd,
+      phone: phone,
+      branch: branch  
+    }
     console.log(newUser)
     const response = await users.createUser(newUser);
     res.status(201).json({

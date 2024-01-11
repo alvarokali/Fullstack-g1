@@ -11,7 +11,7 @@ const PHONE_REGEX = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{3,6}$/;
 const REGISTER_URL = '/api/user';
 
 const Register = () => {
-    const userRef = useRef();
+    const emailRef = useRef();
     const errRef = useRef();
 
     const [user, setUser] = useState('');
@@ -40,7 +40,7 @@ const Register = () => {
     const [success, setSuccess] = useState(false);
 
     useEffect(() => {
-        userRef.current.focus();
+        emailRef.current.focus();
     }, [])
 
     useEffect(() => {
@@ -75,7 +75,7 @@ const Register = () => {
         }
         try {
             const response = await axios.post(REGISTER_URL,
-                JSON.stringify({ user, pwd, email }),
+                JSON.stringify({ user, pwd, email, phone, branch }),
                 {
                     headers: { 'Content-Type': 'application/json' }
                 }
@@ -89,6 +89,9 @@ const Register = () => {
             setUser('');
             setPwd('');
             setMatchPwd('');
+            setEmail('');
+            setPhone('');
+            setBranch('');
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
@@ -125,6 +128,7 @@ const Register = () => {
                         <input
                             type="email"
                             id="email"
+                            ref={emailRef}
                             onChange={(e) => setEmail(e.target.value)}
                             value={email}
                             required
@@ -146,7 +150,6 @@ const Register = () => {
                         <input
                             type="text"
                             id="username"
-                            ref={userRef}
                             autoComplete="off"
                             onChange={(e) => setUser(e.target.value)}
                             value={user}
@@ -229,9 +232,9 @@ const Register = () => {
                         <label htmlFor="branch">Delegación</label>
                         <select id="branch" value={(branch)} onChange={(e) => setBranch(e.target.value)}>
                           <option selected disabled>Elige tu delegación</option>
-                          <option value="Valencia" onClick={(e) => setBranch(e.target.value)}>Valencia</option>
-                          <option value="Madrid" onClick={(e) => setBranch(e.target.value)}>Madrid</option>
-                          <option value="Remoto" onClick={(e) => setBranch(e.target.value)}>Remoto</option>
+                          <option value="Valencia">Valencia</option>
+                          <option value="Madrid">Madrid</option>
+                          <option value="Remoto">Remoto</option>
                         </select>
                         {/* <input
                             type="text"
