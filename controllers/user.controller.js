@@ -1,16 +1,42 @@
 const users = require("../models/users.model");
+const bcrypt = require('bcrypt')
+const jwt = require("jsonwebtoken")
+require('dotenv').config();
 
 const createUser = async (req, res) => {
+
+  const { user, pwd, email, phone, branch } = req.body;
+  if (!user || !pwd || !email) return res.status(400).json({ "message": "Username, email and password are required"})
   try {
-    const newUser = req.body;
+    //encrypt the pwd
+    const hashedPwd = await bcrypt.hash(pwd, 10)
+    //store new user
+    const newUser = { 
+      username: user, 
+      email: email, 
+      password: hashedPwd,
+      phone: phone,
+      branch: branch  
+    }
+    console.log(newUser)
     const response = await users.createUser(newUser);
     res.status(201).json({
-      message: `User created: ${newUser.email}, ID: ${response.id_user}`,
+      message: `User created: ${response.username}, email: ${response.email}`,
     });
+
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ "message": err.message })
   }
+  // try {
+  //   const newUser = req.body;
+  //   const response = await users.createUser(newUser);
+  //   res.status(201).json({
+  //     message: `User created: ${newUser.email}, ID: ${response.id_user}`,
+  //   });
+  // } catch (err) {
+  //   console.error(err);
+  //   res.status(500).json({ error: "Internal Server Error" });
+  // }
 };
 
 const getUserById = async (req, res) => {
@@ -18,6 +44,36 @@ const getUserById = async (req, res) => {
     let allUsers = await users.getUserById(req.params.id);
 
     res.status(200).json(allUsers);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+const handleLogin = async (req, res) => {
+  try {
+    const { email, pwd } = req.body
+    if (!email || !pwd) return res.status(400).json({"message": "Email and password are required"})
+    let foundUser = await users.getUserByEmail(email);
+    if (!foundUser) return res.sendStatus(401)
+    // evaluate password
+    const match = await bcrypt.compare(pwd, foundUser.password)
+    if (match) {
+      // create JWTs
+      const accessToken = jwt.sign(
+        {"username": foundUser.username},
+        process.env.ACCESS_TOKEN_SECRET,
+        { expiresIn: '15m' }
+      )
+      const refreshToken = jwt.sign(
+        {"username": foundUser.username},
+        process.env.REFRESH_TOKEN_SECRET,
+        { expiresIn: '1d' }
+      )
+      res.json({ "username": foundUser.username, accessToken })
+    } else {
+      res.sendStatus(401);
+    }
+    // res.status(200).json(user);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Internal Server Error" });
@@ -65,4 +121,10 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = {getUserById, getAllUsers, createUser, updateUser, deleteUser};
+module.exports = {
+  getUserById,
+  handleLogin, 
+  getAllUsers, 
+  createUser, 
+  updateUser, 
+  deleteUser};

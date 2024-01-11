@@ -1,16 +1,24 @@
 const queriesUser = {
     getUserById: `
         SELECT 
-            id_user,
+            username,
             email,
             password
         FROM users
         WHERE id_user = $1;`,
+
+    getUserByEmail: `
+        SELECT 
+            username,
+            email,
+            password
+        FROM users
+        WHERE email = $1;`,
                         
     getAllUsers: `SELECT * FROM users;`,
 
-    createUser: `INSERT INTO users(email, password) 
-                    VALUES ($1, $2)
+    createUser: `INSERT INTO users(email, password, username, phone, branch) 
+                    VALUES ($1, $2, $3, $4, $5)
                     RETURNING *`,
 
     updateUser:  `UPDATE users

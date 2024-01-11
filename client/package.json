@@ -11,12 +11,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "axios": "^1.6.5",
     "create-react-component-folder": "^0.3.7",
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.1",
+    "react-scripts": "^5.0.1",
     "sass": "^1.69.7"
   },
   "devDependencies": {
