@@ -9,10 +9,12 @@ const queriesUser = {
 
     getUserByEmail: `
         SELECT 
-            username,
+            asesor,
             email,
+            contacto,
+            delegacion,
             password
-        FROM users
+        FROM usuarios
         WHERE email = $1;`,
                         
     getAllUsers: `SELECT * FROM users;`,

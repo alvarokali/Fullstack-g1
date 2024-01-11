@@ -21,7 +21,7 @@ const createUser = async (req, res) => {
     console.log(newUser)
     const response = await users.createUser(newUser);
     res.status(201).json({
-      message: `User created: ${response.username}, email: ${response.email}`,
+      message: `User created: ${response.asesor}, email: ${response.email}`,
     });
 
   } catch (err) {

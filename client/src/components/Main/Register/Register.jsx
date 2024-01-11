@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import logoSeveral from '../../../assets/logo_several.png'
 import axios from '../../../api/axios';
 
 const USER_REGEX = /^[a-z ,.'-]+$/i;
@@ -105,7 +106,8 @@ const Register = () => {
     }
 
     return (
-        <>
+        <>  
+            {/* <img src={logoSeveral} className='auth-logo' alt="" /> */}
             {success ? (
                 <section className="signup-section">
                     <h1>Success!</h1>
@@ -136,6 +138,7 @@ const Register = () => {
                             aria-describedby="emailnote"
                             onFocus={() => setEmailFocus(true)}
                             onBlur={() => setEmailFocus(false)}
+                            className="register-input"
                         />
                         <p id="emailnote" className={emailFocus && email && !validEmail ? "instructions" : "offscreen"}>
                             <FontAwesomeIcon icon={faInfoCircle} />
@@ -158,6 +161,7 @@ const Register = () => {
                             aria-describedby="uidnote"
                             onFocus={() => setUserFocus(true)}
                             onBlur={() => setUserFocus(false)}
+                            className="register-input"
                         />
                         <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
                             <FontAwesomeIcon icon={faInfoCircle} />
@@ -179,6 +183,7 @@ const Register = () => {
                             aria-describedby="pwdnote"
                             onFocus={() => setPwdFocus(true)}
                             onBlur={() => setPwdFocus(false)}
+                            className="register-input"
                         />
                         <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
                             <FontAwesomeIcon icon={faInfoCircle} />
@@ -202,6 +207,7 @@ const Register = () => {
                             aria-describedby="confirmnote"
                             onFocus={() => setMatchFocus(true)}
                             onBlur={() => setMatchFocus(false)}
+                            className="register-input"
                         />
                         <p id="confirmnote" className={matchFocus && !validMatch ? "instructions" : "offscreen"}>
                             <FontAwesomeIcon icon={faInfoCircle} />
@@ -223,6 +229,7 @@ const Register = () => {
                             aria-describedby="phonenote"
                             onFocus={() => setPhoneFocus(true)}
                             onBlur={() => setPhoneFocus(false)}
+                            className="register-input"
                         />
                         <p id="phonenote" className={phoneFocus && !validPhone && phone ? "instructions" : "offscreen"}>
                             <FontAwesomeIcon icon={faInfoCircle} />
@@ -230,7 +237,7 @@ const Register = () => {
                         </p>
 
                         <label htmlFor="branch">Delegación</label>
-                        <select id="branch" value={(branch)} onChange={(e) => setBranch(e.target.value)}>
+                        <select id="branch" value={(branch)} className="register-input" onChange={(e) => setBranch(e.target.value)}>
                           <option selected disabled>Elige tu delegación</option>
                           <option value="Valencia">Valencia</option>
                           <option value="Madrid">Madrid</option>

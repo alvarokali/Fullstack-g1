@@ -1,5 +1,7 @@
 import { useRef, useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
+import logoSeveral from '../../../assets/logo_several.png'
+import heroImage from '../../../assets/hero-image.png'
 import AuthContext from '../../../context/AuthProvider'
 import axios from '../../../api/axios'
 const LOGIN_URL = "api/user/login"
@@ -58,52 +60,61 @@ const Login = () => {
     }
 
     return (
-        <>
-            {success ? (
+        <section id="login-section">
+            <article id="login-color-picture">
+                <img src={heroImage} alt="" />
+            </article>  
+            <article id="login-form">
+                <img src={logoSeveral} className='auth-logo' alt="" />
+                {success ? (
+                    <section>
+                        <h1>You are logged in!</h1>
+                        <br />
+                        <p>
+                            <a href="#">Go to Home</a>
+                        </p>
+                    </section>
+                ) : (
                 <section>
-                    <h1>You are logged in!</h1>
-                    <br />
+                    <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+                    <h2 className='login-title'>Iniciar sesión</h2>
+
+                    <form onSubmit={handleSubmit}>
+                        <input 
+                            type="email" 
+                            id="email"
+                            ref={emailRef}
+                            autoComplete="off"
+                            onChange={(e) => setEmail(e.target.value)} 
+                            value={email}
+                            placeholder='Email'
+                            className='login-input'
+                            required
+                        />
+                        <input 
+                            type="password" 
+                            id="password"
+                            onChange={(e) => setPwd(e.target.value)} 
+                            value={pwd}
+                            placeholder='Contraseña'
+                            className='login-input'
+                            required
+                        />
+                        <a href="#" className='align-start login-a'>¿Has olvidado tu contraseña?</a>
+                        <button disabled={ !email || !pwd ? true : false }>Iniciar sesión</button>
+                    </form>
                     <p>
-                        <a href="#">Go to Home</a>
+                        ¿Eres nuevo? 
+                        <span className='line'>
+                            <Link to="/register">
+                                <a href="#">Crear cuenta</a>
+                            </Link>
+                        </span>
                     </p>
                 </section>
-            ) : (
-            <section>
-                <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                <h1>Sign in</h1>
-
-                <form onSubmit={handleSubmit}>
-                    <label htmlFor='email'>Email:</label>
-                    <input 
-                        type="email" 
-                        id="email"
-                        ref={emailRef}
-                        autoComplete="off"
-                        onChange={(e) => setEmail(e.target.value)} 
-                        value={email}
-                        required
-                    />
-                    <label htmlFor='password'>Password:</label>
-                    <input 
-                        type="password" 
-                        id="password"
-                        onChange={(e) => setPwd(e.target.value)} 
-                        value={pwd}
-                        required
-                    />
-                    <button>Sign In</button>
-                </form>
-                <p>
-                    Need an account? <br />
-                    <span className='line'>
-                        <Link to="/register">
-                            <a href="#">Sign up</a>
-                        </Link>
-                    </span>
-                </p>
-            </section>
-            )}
-        </>
+                )}
+            </article>
+        </section>
     )
 }
 
