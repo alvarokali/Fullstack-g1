@@ -1,5 +1,5 @@
 const queriesUser = {
-  getUserById: `
+  getUserByEmail: `
          SELECT 
             usuario_id,
             email,
@@ -9,7 +9,7 @@ const queriesUser = {
              contacto,
              delegacion
          FROM usuarios
-         WHERE usuario_id = $1;`,
+         WHERE email = $1;`,
 
   getAllUsers: `SELECT * FROM usuarios;`,
 
