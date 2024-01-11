@@ -1,10 +1,16 @@
 import React from "react";
-import FormCups from "./FormCups"
+import { Link } from "react-router-dom";
+import FormCups from "./FormCups";
 
 const Cups = () => {
-  return <><FormCups/>
-  <a href="#">No tengo el CUPS</a>
-  </>;
+  return (
+    <>
+      <section className="section-cups">
+        <FormCups />
+        <Link to="/client">No tengo el CUPS</Link>
+      </section>
+    </>
+  );
 };
 
 export default Cups;

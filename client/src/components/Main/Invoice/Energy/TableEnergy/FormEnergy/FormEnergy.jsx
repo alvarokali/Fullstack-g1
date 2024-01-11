@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TextField from "@mui/material/TextField";
@@ -231,9 +232,11 @@ const FormEnergy = () => {
           <Button variant="contained" color="primary">
             Ver tabla completa
           </Button>
+          <Link to="#">
           <Button variant="contained" color="secondary">
             Continuar
           </Button>
+          </Link>
         </div>
       </div>
     </>
