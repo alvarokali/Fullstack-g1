@@ -4,7 +4,7 @@ import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from '../../../api/axios';
 
-const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
+const USER_REGEX = /^[a-z ,.'-]+$/i;
 const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const PHONE_REGEX = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{3,6}$/;
@@ -161,7 +161,7 @@ const Register = () => {
                         />
                         <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
                             <FontAwesomeIcon icon={faInfoCircle} />
-                            Introduce tu nombre.
+                            Símbolo introducido no válido.
                         </p>
 
                         <label htmlFor="password">
