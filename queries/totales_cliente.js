@@ -9,7 +9,8 @@ const queriesTotales_Cliente = {
                         t_pago_anual_potencia, 
                         importe_total_factura, 
                         total_anual_estimado ) 
-                        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);`,
+                        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+                        RETURNING *`,
   
     getTotales_Cliente: `SELECT * FROM totales_cliente`,
   
@@ -26,7 +27,8 @@ const queriesTotales_Cliente = {
                         t_pago_anual_potencia = $7, 
                         importe_total_factura = $8,
                         total_anual_estimado = $9
-                        WHERE totales_id = $1;`,
+                        WHERE totales_id = $1
+                        RETURNING *`,
   
     deleteTotales_Cliente: `DELETE FROM totales_cliente WHERE totales_id = $1;`
   };

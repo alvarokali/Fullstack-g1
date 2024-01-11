@@ -19,7 +19,8 @@ createFranjas_Cliente:`INSERT INTO franjas_cliente (
     total_pago_fact_potencia, 
     total_pago_anual_potencia
   ) 
-  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17);`,
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)
+  RETURNING *`,
 
 getFranjas_cliente:`SELECT * FROM franjas_cliente;`,
 
@@ -44,7 +45,8 @@ SET
   total_pago_fact_potencia = $16,
   total_pago_anual_potencia = $17
 
-WHERE franjas_id = $1;`,
+WHERE franjas_id = $1
+RETURNING *`,
 
 deleteFranjas_Cliente:`DELETE FROM franjas_cliente WHERE franjas_id = $1;`
 }

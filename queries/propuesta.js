@@ -7,7 +7,8 @@ const queriesPropuesta= {
                           total_pago_anual_energia,
                           total_pago_fact_potencia,
                           total_pago_anual_potencia)
-                          VALUES ($1, $2, $3, $4, $5, $6);`,
+                          VALUES ($1, $2, $3, $4, $5, $6)
+                          RETURNING *`,
   
     getPropuesta: `SELECT * FROM propuesta`,
   
@@ -21,7 +22,8 @@ const queriesPropuesta= {
                           total_pago_anual_energia = $4,
                           total_pago_fact_potencia = $5,
                           total_pago_anual_potencia = $6
-                          WHERE propuesta_id = $1;`,
+                          WHERE propuesta_id = $1
+                          RETURNING *`,
   
     deletePropuesta: `DELETE FROM propuesta WHERE propuesta_id = $1;`
   };
