@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect, useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import logoSeveral from '../../../assets/logo_several.png'
 import heroImage from '../../../assets/hero-image.png'
 import AuthContext from '../../../context/AuthProvider'
@@ -7,6 +7,8 @@ import axios from '../../../api/axios'
 const LOGIN_URL = "api/user/login"
 
 const Login = () => {
+
+    const navigate = useNavigate()
 
     const { setAuth } = useContext(AuthContext)
     const emailRef = useRef()
@@ -43,6 +45,9 @@ const Login = () => {
             setEmail("")
             setPwd("")
             setSuccess(true)
+            setTimeout(() => {
+                navigate("/home")
+            }, 3000);
         } catch (err) {
             if (!err?.response) {
                 setErrMsg("No Server Response")
@@ -103,7 +108,7 @@ const Login = () => {
                         <a href="#" className='align-start login-a'>¿Has olvidado tu contraseña?</a>
                         <button disabled={ !email || !pwd ? true : false }>Iniciar sesión</button>
                     </form>
-                    <p>
+                    <p className="align-start">
                         ¿Eres nuevo? 
                         <span className='line'>
                             <Link to="/register">

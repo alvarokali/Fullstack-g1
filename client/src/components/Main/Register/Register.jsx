@@ -126,7 +126,7 @@ const Register = () => {
                 ) : (
                     <section className="signup-section">
                         <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                        <h1>Crear cuenta</h1>
+                        <h2>Crear cuenta</h2>
                         <form onSubmit={handleSubmit}>
                             <label htmlFor="email">
                                 Correo Electrónico
@@ -267,6 +267,14 @@ const Register = () => {
 
                             <button disabled={!validName || !validPwd || !validEmail || !validMatch || !validPhone ? true : false}>Crear cuenta</button>
                         </form>
+                        <p className="align-start">
+                            ¿Ya tienes cuenta? 
+                            <span className='line'>
+                                <Link to="/login">
+                                    <a href="#">Inicia sesión</a>
+                                </Link>
+                            </span>
+                        </p>
                     </section>
                 )}
             </article>
