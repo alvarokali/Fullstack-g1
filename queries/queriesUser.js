@@ -14,7 +14,7 @@ const queriesUser = {
   getAllUsers: `SELECT * FROM usuarios;`,
 
   createUser: `
-        INSERT INTO usuarios(email, password, admin, asesor, contacto, delegacion) 
+        INSERT INTO usuarios(email, password, asesor, contacto, delegacion) 
         VALUES ($1, $2, $3, $4, $5, $6)
         RETURNING *;`,
 
